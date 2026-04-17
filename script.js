@@ -70,16 +70,17 @@ function render() {
     document.getElementById("searchInput").value || ""
   ).toLowerCase();
   const selectedEpisode = document.getElementById("episodeSelect").value;
-  const filteredEpisodes = allEpisodes.filter((episode) => {
-    const name = (episode.name || "").toLowerCase();
-    const summary = (episode.summary || "").toLowerCase();
 
-    const matchesSearch =
-      name.includes(searchTerm) || summary.includes(searchTerm);
+  const filteredEpisodes = allEpisodes.filter((episode) => {
+    //const name = (episode.name || "").toLowerCase();
+    //const summary = (episode.summary || "").toLowerCase();
+
+    //const matchesSearch =
+    //  name.includes(searchTerm) || summary.includes(searchTerm);
 
     const matchesEpisode =
       selectedEpisode === "all" ||
-      String(episode.id) === String(selectedEpisode);
+      //formatEpisodeCode(episode.season, episode.number) === selectedEpisode;
 
     return matchesSearch && matchesEpisode;
 
@@ -90,8 +91,33 @@ function render() {
   updateEpisodeCount(filteredEpisodes);
 }
 
+function populateEpisodes(episodes) {
+  const episodeSelect = document.getElementById("episodeSelect");
+  episodeSelect.innerHTML = ""; // Clear existing options
+
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "all";
+  defaultOption.textContent = "All Episodes";
+  episodeSelect.appendChild(defaultOption);
+
+  episodes.forEach((episode) => {
+    const option = document.createElement("option");
+    option.value = formatEpisodeCode(episode.season, episode.number);
+    option.textContent = `${episode.name} (${formatEpisodeCode(episode.season, episode.number)})`;
+    //option.value = episode.id;
+    //option.textContent = episode.name;
+    episodeSelect.appendChild(option);
+  });
+}
+
+//Listen for dropdown change in JS
+episodeSelect.addEventListener("change", function () {
+  render();
+});
+
 function setup() {
   allEpisodes = getAllEpisodes();
+  populateEpisodes(allEpisodes);
   displayEpisodes(allEpisodes);
   updateEpisodeCount(allEpisodes);
 
