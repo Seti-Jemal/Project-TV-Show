@@ -114,7 +114,7 @@ function render() {
 
 function populateEpisodes(episodes) {
   const episodeSelect = document.getElementById("episodeSelect");
-  episodeSelect.innerHTML = ""; // Clear existing options
+  //episodeSelect.innerHTML = ""; // Clear existing options
 
   const defaultOption = document.createElement("option");
   defaultOption.value = "all";
