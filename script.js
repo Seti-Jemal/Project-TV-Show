@@ -72,19 +72,18 @@ function render() {
   const selectedEpisode = document.getElementById("episodeSelect").value;
 
   const filteredEpisodes = allEpisodes.filter((episode) => {
-    //const name = (episode.name || "").toLowerCase();
-    //const summary = (episode.summary || "").toLowerCase();
+    const episodeCode = formatEpisodeCode(episode.season, episode.number);
+    const name = (episode.name || "").toLowerCase();
+    const summary = (episode.summary || "").toLowerCase();
 
-    //const matchesSearch =
-    //  name.includes(searchTerm) || summary.includes(searchTerm);
+    const matchesSearch =
+      searchTerm === "" ||
+      name.includes(searchTerm) ||
+      summary.includes(searchTerm);
 
-    const matchesEpisode =
-      selectedEpisode === "all" ||
-      //formatEpisodeCode(episode.season, episode.number) === selectedEpisode;
-
-    return matchesSearch && matchesEpisode;
-
-    return name.includes(searchTerm) || summary.includes(searchTerm);
+    const matchesDropdown =
+      selectedEpisode === "all" || episodeCode === selectedEpisode;
+    return matchesSearch && matchesDropdown;
   });
 
   displayEpisodes(filteredEpisodes);
@@ -104,16 +103,15 @@ function populateEpisodes(episodes) {
     const option = document.createElement("option");
     option.value = formatEpisodeCode(episode.season, episode.number);
     option.textContent = `${episode.name} (${formatEpisodeCode(episode.season, episode.number)})`;
-    //option.value = episode.id;
-    //option.textContent = episode.name;
+
     episodeSelect.appendChild(option);
   });
 }
 
 //Listen for dropdown change in JS
-episodeSelect.addEventListener("change", function () {
-  render();
-});
+//episodeSelect.addEventListener("change", function () {
+//  render();
+//});
 
 function setup() {
   allEpisodes = getAllEpisodes();
@@ -123,9 +121,18 @@ function setup() {
 
   const searchInput = document.getElementById("searchInput");
   const episodeSelect = document.getElementById("episodeSelect");
+  const clearButton = document.getElementById("clearFilters");
 
   searchInput.addEventListener("input", render);
   episodeSelect.addEventListener("change", render);
+
+  clearButton.addEventListener("click", () => {
+    searchInput.value = "";
+    episodeSelect.value = "all";
+    render();
+    //document.getElementById("searchInput").addEventListener("input", render);
+    //document.getElementById("episodeSelect").addEventListener("change", render);
+  });
 }
 
 window.onload = setup;
