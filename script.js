@@ -66,10 +66,12 @@ function updateEpisodeCount(episodes) {
 }
 
 function render() {
-  const searchTerm = (
-    document.getElementById("searchInput").value || ""
-  ).toLowerCase();
-  const selectedEpisode = document.getElementById("episodeSelect").value;
+  const clearButton = document.getElementById("clearFilters");
+  const activeFiltersText = document.getElementById("activeFilters");
+  const helperMessage = document.getElementById("helperMessage");
+
+  const searchTerm = searchInput.value.toLowerCase();
+  const selectedEpisode = episodeSelect.value;
 
   const filteredEpisodes = allEpisodes.filter((episode) => {
     const episodeCode = formatEpisodeCode(episode.season, episode.number);
@@ -77,17 +79,37 @@ function render() {
     const summary = (episode.summary || "").toLowerCase();
 
     const matchesSearch =
-      searchTerm === "" ||
-      name.includes(searchTerm) ||
-      summary.includes(searchTerm);
+      name.includes(searchTerm) || summary.includes(searchTerm);
 
     const matchesDropdown =
       selectedEpisode === "all" || episodeCode === selectedEpisode;
+
     return matchesSearch && matchesDropdown;
   });
 
   displayEpisodes(filteredEpisodes);
   updateEpisodeCount(filteredEpisodes);
+
+  const hasSearch = searchInput.value !== "";
+  const hasDropdown = episodeSelect.value !== "all";
+
+  //clearButton.style.display = "inline-block";
+
+  if (hasSearch && hasDropdown) {
+    activeFiltersText.textContent = `Filtering by: "${searchInput.value}" in ${episodeSelect.value}`;
+  } else if (hasSearch) {
+    activeFiltersText.textContent = `Filtering by: "${searchInput.value}"`;
+  } else if (hasDropdown) {
+    activeFiltersText.textContent = `Filtering by: ${episodeSelect.value}`;
+  } else {
+    activeFiltersText.textContent = "";
+  }
+  if (hasSearch || hasDropdown) {
+    helperMessage.textContent =
+      "Press 'Clear Filters' to reset your search and dropdown selections.";
+  } else {
+    helperMessage.textContent = "";
+  }
 }
 
 function populateEpisodes(episodes) {
@@ -108,11 +130,6 @@ function populateEpisodes(episodes) {
   });
 }
 
-//Listen for dropdown change in JS
-//episodeSelect.addEventListener("change", function () {
-//  render();
-//});
-
 function setup() {
   allEpisodes = getAllEpisodes();
   populateEpisodes(allEpisodes);
@@ -130,8 +147,6 @@ function setup() {
     searchInput.value = "";
     episodeSelect.value = "all";
     render();
-    //document.getElementById("searchInput").addEventListener("input", render);
-    //document.getElementById("episodeSelect").addEventListener("change", render);
   });
 }
 
