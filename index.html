@@ -13,20 +13,33 @@
       <header class="page-header">
         <h1>TV Show Episodes</h1>
 
+        <!-- Episode count -->
         <p id="episode-count" class="episode-count"></p>
 
-        <input type="text" id="searchInput" placeholder="Search episodes..." />
-
-        <select id="episodeSelect">
-          <option value="all">All episodes</option>
+        <!-- Show selector (NEW for Level 400) -->
+        <select id="showSelect">
+          <option value="">Loading shows...</option>
         </select>
 
+        <!-- Search -->
+        <input type="text" id="searchInput" placeholder="Search episodes..." />
+
+        <!-- Episode dropdown -->
+        <select id="episodeSelect">
+          <option value="all">All Episodes</option>
+        </select>
+
+        <!-- Clear button -->
         <button id="clearFilters">Clear Filters</button>
 
+        <!-- Messages -->
         <p id="activeFilters"></p>
         <p id="helperMessage"></p>
+        <p id="loadingMessage"></p>
+        <p id="errorMessage"></p>
       </header>
 
+      <!-- Episodes container -->
       <section
         id="root"
         class="episode-grid"
@@ -34,10 +47,10 @@
       ></section>
     </main>
 
-    <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
-    <script src="episodes.js"></script>
+    <!-- IMPORTANT: remove this for level 300+ -->
+    <!-- <script src="episodes.js"></script> -->
 
-    <!-- Loads YOUR javascript code -->
+    <!-- Your script -->
     <script src="script.js"></script>
   </body>
 </html>
