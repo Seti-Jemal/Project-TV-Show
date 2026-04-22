@@ -11,33 +11,59 @@
   <body>
     <main class="page">
       <header class="page-header">
-        <h1>TV Show Episodes</h1>
+        <h1>TV Show Project</h1>
 
-        <p id="episode-count" class="episode-count"></p>
+        <button id="backToShowsButton" hidden>Back to shows</button>
 
-        <input type="text" id="searchInput" placeholder="Search episodes..." />
+        <div id="showsView">
+          <input
+            type="text"
+            id="showSearchInput"
+            placeholder="Search shows..."
+          />
+          <p id="showCount"></p>
+          <section
+            id="showsRoot"
+            class="shows-grid"
+            aria-label="List of TV shows"
+          ></section>
+        </div>
 
-        <select id="episodeSelect">
-          <option value="all">All episodes</option>
-        </select>
+        <div id="episodesView" hidden>
+          <p id="episode-count" class="episode-count"></p>
 
-        <button id="clearFilters">Clear Filters</button>
+          <select id="showSelect">
+            <option value="">Loading shows...</option>
+          </select>
 
-        <p id="activeFilters"></p>
-        <p id="helperMessage"></p>
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search episodes..."
+          />
+
+          <select id="episodeSelect">
+            <option value="all">All Episodes</option>
+          </select>
+
+          <button id="clearFilters">Clear Filters</button>
+
+          <p id="activeFilters"></p>
+          <p id="helperMessage"></p>
+        </div>
+
+        <p id="loadingMessage"></p>
+        <p id="errorMessage"></p>
       </header>
 
       <section
         id="root"
         class="episode-grid"
         aria-label="List of TV show episodes"
+        hidden
       ></section>
     </main>
 
-    <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
-    <script src="episodes.js"></script>
-
-    <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
   </body>
 </html>
