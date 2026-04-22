@@ -74,3 +74,21 @@ body {
   margin: 0 auto;
   padding: 0 1.5rem 2rem;
 }
+#showSelect,
+#episodeSelect,
+#searchInput,
+#clearFilters {
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+#loadingMessage {
+  color: blue;
+  font-weight: bold;
+}
+
+#errorMessage {
+  color: red;
+  font-weight: bold;
+}
