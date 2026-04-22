@@ -1,76 +1,36 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  color: #222;
-  line-height: 1.5;
-}
-
-.page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1.5rem;
-}
-
-.page-header {
-  margin-bottom: 1.5rem;
-}
-
-.page-header h1 {
-  margin: 0 0 0.5rem;
-}
-
-.episode-count {
-  margin: 0;
-  font-weight: bold;
-}
-
-.episode-grid {
+.shows-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
 }
 
-.episode-card {
-  background-color: #ffffff;
-  border: 1px solid #dddddd;
-  border-radius: 8px;
-  padding: 1rem;
+#showSearchInput,
+#showSelect,
+#episodeSelect,
+#searchInput,
+#clearFilters,
+#backToShowsButton {
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  padding: 0.5rem;
+  font-size: 1rem;
 }
 
-.episode-title {
-  margin-top: 0;
-  font-size: 1.1rem;
-}
-
-.episode-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 4px;
-  margin-bottom: 1rem;
-}
-
-.episode-meta {
+#loadingMessage {
+  color: blue;
   font-weight: bold;
-  margin-bottom: 0.75rem;
 }
 
-.episode-summary {
-  margin-bottom: 1rem;
+#errorMessage {
+  color: red;
+  font-weight: bold;
 }
 
-.episode-link a,
-.page-footer a {
+.show-title-button {
+  background: none;
+  border: none;
+  padding: 0;
   color: #0056b3;
-}
-
-.page-footer {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem 2rem;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
 }
